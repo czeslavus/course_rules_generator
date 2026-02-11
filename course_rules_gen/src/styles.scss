@@ -1,11 +1,9 @@
-* {
-  box-sizing: border-box;
-}
-
 html,
 body {
+  min-height: 100%;
+}
+
+body {
   margin: 0;
-  font-family: Inter, Roboto, 'Segoe UI', sans-serif;
-  color: #0f172a;
-  background: #f8fafc;
+  background-color: var(--bs-light);
 }

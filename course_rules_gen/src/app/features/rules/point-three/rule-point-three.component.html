@@ -1,0 +1,67 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 3 - Szczegółowe sposoby etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się
+      oraz rodzaje materiałów i urządzeń dopuszczonych do używania przez studentów podczas weryfikacji
+      osiągnięcia efektów uczenia się
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        @if (!selectedTypes().length) {
+          <div class="alert alert-secondary mb-0" role="status">
+            Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 3.
+          </div>
+        } @else {
+          <div class="d-grid gap-3">
+            @for (type of selectedTypes(); track type.id) {
+              <fieldset class="border rounded p-3">
+                <legend class="float-none w-auto px-2 mb-2 fs-6 fw-semibold">{{ type.label }}</legend>
+
+                <div class="mb-3">
+                  <label class="form-label" [for]="'point3-rules-' + type.id">Zasady weryfikacji</label>
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    [id]="'point3-rules-' + type.id"
+                    [ngModel]="getParams(type.id).verificationRules"
+                    (ngModelChange)="updateVerificationRules(type.id, $event)"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label class="form-label" [for]="'point3-materials-' + type.id">
+                    Materiały i urządzenia pomocnicze (opcjonalnie)
+                  </label>
+                  <textarea
+                    class="form-control"
+                    rows="2"
+                    [id]="'point3-materials-' + type.id"
+                    [ngModel]="getParams(type.id).helperMaterials"
+                    (ngModelChange)="updateHelperMaterials(type.id, $event)"
+                    placeholder="Np. kalkulator prosty, tablice wzorów"
+                  ></textarea>
+                </div>
+              </fieldset>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <p class="mb-0 flex-grow-1 pre-line">{{ generatedText() }}</p>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!generatedText()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

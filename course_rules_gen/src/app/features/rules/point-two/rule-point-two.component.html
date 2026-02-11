@@ -1,0 +1,84 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 2 - Zasady wymaganej obecności studenta na zajęciach, na których obecność jest obowiązkowa
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        @if (!selectedTypes().length) {
+          <div class="alert alert-secondary mb-0" role="status">
+            Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 2.
+          </div>
+        } @else {
+          <div class="d-grid gap-3">
+            @for (type of selectedTypes(); track type.id) {
+              <fieldset class="border rounded p-3">
+                <legend class="float-none w-auto px-2 mb-2 fs-6 fw-semibold">{{ type.label }}</legend>
+
+                @if (type.id !== 'lecture') {
+                  <div class="mb-3">
+                    <label class="form-label" [for]="'point2-max-' + type.id">
+                      Dopuszczalna liczba nieusprawiedliwionych nieobecności (x)
+                    </label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0"
+                      [id]="'point2-max-' + type.id"
+                      [value]="getParams(type.id).maxUnexcusedAbsences"
+                      (input)="updateMaxAbsences(type.id, $any($event.target).value)"
+                    />
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      [id]="'point2-makeup-' + type.id"
+                      [checked]="getParams(type.id).allowMakeup"
+                      (change)="updateAllowMakeup(type.id, $any($event.target).checked)"
+                    />
+                    <label class="form-check-label" [for]="'point2-makeup-' + type.id">
+                      Możliwość odrabiania
+                    </label>
+                  </div>
+
+                  @if (getParams(type.id).allowMakeup) {
+                    <div>
+                      <label class="form-label" [for]="'point2-makeup-text-' + type.id">Zasady odrabiania</label>
+                      <textarea
+                        class="form-control"
+                        rows="4"
+                        [id]="'point2-makeup-text-' + type.id"
+                        [value]="getParams(type.id).makeupRulesText"
+                        (input)="updateMakeupRulesText(type.id, $any($event.target).value)"
+                      ></textarea>
+                    </div>
+                  }
+                } @else {
+                  <p class="text-body-secondary mb-0">Dla wykładu tekst jest generowany automatycznie.</p>
+                }
+              </fieldset>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <p class="mb-0 flex-grow-1 pre-line">{{ generatedText() }}</p>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!generatedText()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
