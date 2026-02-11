@@ -1,0 +1,17 @@
+<div class="shell">
+  <header>
+    <div>
+      <h1>Generator regulaminów przedmiotów</h1>
+      <p>Wersja lokalna – edycja punktów regulaminu.</p>
+    </div>
+
+    <div class="user-panel">
+      <span>{{ authService.username() }}</span>
+      <button type="button" (click)="logout()">Wyloguj</button>
+    </div>
+  </header>
+
+  <main>
+    <app-rule-point-one />
+  </main>
+</div>
