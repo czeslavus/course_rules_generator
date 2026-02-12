@@ -1,0 +1,126 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 4 - Harmonogram etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się, w
+      szczególności terminy sprawdzianów pisemnych i ustnych oraz terminy złożenia sprawozdań z
+      wykonania ćwiczeń laboratoryjnych i projektów z uwzględnieniem terminów poprawkowych, jeśli
+      specyfika przedmiotu to umożliwia
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        @if (!selectedTypes().length) {
+          <div class="alert alert-secondary mb-0" role="status">
+            Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 4.
+          </div>
+        } @else {
+          <div class="d-grid gap-3">
+            @for (type of selectedTypes(); track type.id) {
+              <fieldset class="border rounded p-3">
+                <legend class="float-none w-auto px-2 mb-2 fs-6 fw-semibold">{{ type.label }}</legend>
+
+                @if (type.id === 'lecture' || type.id === 'classes') {
+                  <div class="mb-3">
+                    <label class="form-label" [for]="'point4-count-' + type.id">Liczba kolokwiów</label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0"
+                      [id]="'point4-count-' + type.id"
+                      [value]="getCount(type.id)"
+                      (input)="updateCount(type.id, $any($event.target).value)"
+                    />
+                  </div>
+
+                  @if (getCount(type.id) > 0) {
+                    <div class="d-grid gap-2">
+                      @for (week of getWeeks(type.id); track $index) {
+                        <div>
+                          <label class="form-label" [for]="'point4-week-' + type.id + '-' + $index">
+                            Termin kolokwium {{ $index + 1 }} (tydzień zajęć 1-15)
+                          </label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            min="1"
+                            max="15"
+                            [id]="'point4-week-' + type.id + '-' + $index"
+                            [value]="week"
+                            (input)="updateWeek(type.id, $index, $any($event.target).value)"
+                          />
+                        </div>
+                      }
+                    </div>
+                  }
+                } @else if (type.id === 'project') {
+                  <div class="mb-3">
+                    <label class="form-label" [for]="'point4-count-' + type.id">Liczba etapów</label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      min="0"
+                      [id]="'point4-count-' + type.id"
+                      [value]="getCount(type.id)"
+                      (input)="updateCount(type.id, $any($event.target).value)"
+                    />
+                  </div>
+
+                  @if (getCount(type.id) > 0) {
+                    <div class="d-grid gap-2">
+                      @for (week of getWeeks(type.id); track $index) {
+                        <div>
+                          <label class="form-label" [for]="'point4-week-' + type.id + '-' + $index">
+                            Termin etapu {{ $index + 1 }} (tydzień zajęć 1-15)
+                          </label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            min="1"
+                            max="15"
+                            [id]="'point4-week-' + type.id + '-' + $index"
+                            [value]="week"
+                            (input)="updateWeek(type.id, $index, $any($event.target).value)"
+                          />
+                        </div>
+                      }
+                    </div>
+                  }
+                } @else if (type.id === 'laboratory' || type.id === 'computer_classes') {
+                  <label class="form-label" [for]="'point4-submission-' + type.id">
+                    Harmonogram składania sprawozdań
+                  </label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    [id]="'point4-submission-' + type.id"
+                    [ngModel]="getSubmissionText(type.id)"
+                    (ngModelChange)="updateSubmissionText(type.id, $event)"
+                  ></textarea>
+                } @else {
+                  <p class="text-body-secondary mb-0">
+                    Dla tego typu zajęć harmonogram weryfikacji jest generowany automatycznie.
+                  </p>
+                }
+              </fieldset>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <p class="mb-0 flex-grow-1 pre-line">{{ generatedText() }}</p>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!generatedText()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

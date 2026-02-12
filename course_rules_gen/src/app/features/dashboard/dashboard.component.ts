@@ -9,6 +9,7 @@ import {
 } from '../rules/point-two/rule-point-two.component';
 import { RulePointNineComponent } from '../rules/point-nine/rule-point-nine.component';
 import { RulePointThreeComponent } from '../rules/point-three/rule-point-three.component';
+import { RulePointFourComponent } from '../rules/point-four/rule-point-four.component';
 import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.component';
 
 @Component({
@@ -18,6 +19,7 @@ import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.compone
     RulePointOneComponent,
     RulePointTwoComponent,
     RulePointThreeComponent,
+    RulePointFourComponent,
     RulePointNineComponent,
     RulePointTenComponent,
   ],
