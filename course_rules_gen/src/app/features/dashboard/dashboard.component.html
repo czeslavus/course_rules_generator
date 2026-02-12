@@ -1,17 +1,66 @@
-<div class="shell">
-  <header>
-    <div>
-      <h1>Generator regulaminów przedmiotów</h1>
-      <p>Wersja lokalna – edycja punktów regulaminu.</p>
-    </div>
+<div class="min-vh-100 bg-light">
+  <nav class="navbar bg-white border-bottom">
+    <div class="container-xl">
+      <div>
+        <h1 class="h4 mb-1">Generator regulaminów przedmiotów</h1>
+        <p class="text-body-secondary mb-0">Wersja lokalna - edycja punktów regulaminu.</p>
+      </div>
 
-    <div class="user-panel">
-      <span>{{ authService.username() }}</span>
-      <button type="button" (click)="logout()">Wyloguj</button>
+      <div class="d-flex align-items-center gap-3">
+        <span class="fw-semibold">{{ authService.username() }}</span>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="logout()">
+          Wyloguj
+        </button>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <main>
+  <main class="container-xl py-4 d-grid gap-3">
+    <section class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 card-title mb-3">Parametry wspólne dla wszystkich punktów</h2>
+
+        <div class="row g-2">
+          @for (option of classTypeOptions; track option.id) {
+            <div class="col-sm-6 col-lg-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [id]="'shared-type-' + option.id"
+                  [checked]="isClassTypeSelected(option.id)"
+                  (change)="toggleClassType(option.id, $any($event.target).checked)"
+                />
+                <label class="form-check-label" [for]="'shared-type-' + option.id">
+                  {{ option.label }}
+                </label>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="form-check mt-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="shared-exam-subject"
+            [checked]="isExamSubject()"
+            (change)="toggleExamSubject($any($event.target).checked)"
+          />
+          <label class="form-check-label" for="shared-exam-subject">przedmiot egzaminacyjny</label>
+        </div>
+      </div>
+    </section>
+
     <app-rule-point-one />
+    <app-rule-point-two [selectedTypes]="selectedClassTypes()" />
+    <app-rule-point-three [selectedTypes]="selectedClassTypes()" [isExamSubject]="isExamSubject()" />
+    <app-rule-point-four [selectedTypes]="selectedClassTypes()" [isExamSubject]="isExamSubject()" />
+    <app-rule-point-five [isExamSubject]="isExamSubject()" />
+    <app-rule-point-six />
+    <app-rule-point-seven />
+    <app-rule-point-eight [isExamSubject]="isExamSubject()" />
+    <app-rule-point-nine />
+    <app-rule-point-ten />
   </main>
 </div>

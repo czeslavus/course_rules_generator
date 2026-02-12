@@ -1,0 +1,35 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">Punkt 10 - Inne informacje w zależności od specyfiki realizowanych zajęć</h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="d-grid gap-2">
+          <label class="form-label mb-0" for="point10-text">Tekst punktu 10</label>
+          <textarea
+            id="point10-text"
+            class="form-control"
+            rows="7"
+            [ngModel]="text()"
+            (ngModelChange)="updateText($event)"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <textarea class="form-control flex-grow-1" rows="8" readonly [value]="text()"></textarea>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!text().trim()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 6 - Zasady zaliczania przedmiotu i wystawiania oceny końcowej z przedmiotu
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary">
+          <label class="form-label" for="point6-text">Treść punktu</label>
+          <textarea
+            class="form-control"
+            rows="10"
+            id="point6-text"
+            [ngModel]="textState()"
+            (ngModelChange)="updateText($event)"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <textarea
+            class="form-control flex-grow-1"
+            rows="10"
+            readonly
+            [value]="generatedText()"
+          ></textarea>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!generatedText()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

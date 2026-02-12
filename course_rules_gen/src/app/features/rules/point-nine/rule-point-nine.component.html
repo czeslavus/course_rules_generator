@@ -1,0 +1,26 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 9 - Zasady powtarzania z powodu niezadowalających wyników w nauce poszczególnych typów zajęć realizowanych w ramach przedmiotu
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary">
+          <h3 class="h6 mb-2">Stały tekst punktu</h3>
+          <p class="mb-0 pre-line">{{ text }}</p>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <textarea class="form-control flex-grow-1" rows="8" readonly [value]="text"></textarea>
+          <button type="button" class="btn btn-primary btn-sm mt-3 align-self-start" (click)="copyGeneratedText()">
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

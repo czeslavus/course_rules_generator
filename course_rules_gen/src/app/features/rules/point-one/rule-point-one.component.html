@@ -1,54 +1,62 @@
-<section class="point-card">
-  <h2>Punkt 1 – Rekomendacje i ograniczenia udziału studentów</h2>
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">Punkt 1 - Rekomendacje i ograniczenia udziału studentów</h2>
 
-  <div class="grid">
-    <form class="params" [formGroup]="form">
-      <label>
-        Typ przedmiotu
-        <select formControlName="subjectType">
-          <option value="obowiązkowy">Obowiązkowy</option>
-          <option value="wariantowy">Wariantowy</option>
-          <option value="obieralny">Obieralny</option>
-        </select>
-      </label>
+    <div class="row g-3">
+      <form class="col-6 d-grid gap-3" [formGroup]="form">
+        <div>
+          <label class="form-label" for="point1-subjectType">Typ przedmiotu</label>
+          <select class="form-select" id="point1-subjectType" formControlName="subjectType">
+            <option value="obowiązkowy">Obowiązkowy</option>
+            <option value="wariantowy">Wariantowy</option>
+            <option value="obieralny">Obieralny</option>
+          </select>
+        </div>
 
-      <label>
-        Stopień studiów
-        <select formControlName="degreeLevel">
-          <option value="I">I</option>
-          <option value="II">II</option>
-        </select>
-      </label>
+        <div>
+          <label class="form-label" for="point1-degreeLevel">Stopień studiów</label>
+          <select class="form-select" id="point1-degreeLevel" formControlName="degreeLevel">
+            <option value="I">I</option>
+            <option value="II">II</option>
+          </select>
+        </div>
 
-      <label>
-        Program / kierunek
-        <select formControlName="programme">
-          <option value="Mechatronika">Mechatronika</option>
-          <option value="Automatyka Robotyka i Informatyka Przemysłowa">
-            Automatyka Robotyka i Informatyka Przemysłowa
-          </option>
-          <option value="Inżynieria Biomedyczna">Inżynieria Biomedyczna</option>
-          <option value="Mechatronics">Mechatronics</option>
-          <option value="Część wspólna kierunku Mechatronika / ARiIP">
-            Część wspólna kierunku Mechatronika / ARiIP
-          </option>
-        </select>
-      </label>
+        <div>
+          <label class="form-label" for="point1-programme">Program / kierunek</label>
+          <select class="form-select" id="point1-programme" formControlName="programme">
+            <option value="Mechatronika">Mechatronika</option>
+            <option value="Automatyka Robotyka i Informatyka Przemysłowa">
+              Automatyka Robotyka i Informatyka Przemysłowa
+            </option>
+            <option value="Inżynieria Biomedyczna">Inżynieria Biomedyczna</option>
+            <option value="Mechatronics">Mechatronics</option>
+            <option value="Część wspólna kierunku Mechatronika / ARiIP">
+              Część wspólna kierunku Mechatronika / ARiIP
+            </option>
+          </select>
+        </div>
 
-      <label>
-        Wymagania wstępne (opcjonalne)
-        <textarea
-          formControlName="prerequisites"
-          rows="4"
-          placeholder="Np. zaliczenie Matematyki 1 i Podstaw Programowania"
-        ></textarea>
-      </label>
-    </form>
+        <div>
+          <label class="form-label" for="point1-prerequisites">Wymagania wstępne (opcjonalne)</label>
+          <textarea
+            class="form-control"
+            id="point1-prerequisites"
+            formControlName="prerequisites"
+            rows="4"
+            placeholder="Np. zaliczenie Matematyki 1 i Podstaw Programowania"
+          ></textarea>
+        </div>
+      </form>
 
-    <div class="preview">
-      <h3>Wygenerowany tekst</h3>
-      <p>{{ generatedText() }}</p>
-      <button type="button" (click)="copyGeneratedText()">Kopiuj do schowka</button>
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <textarea class="form-control flex-grow-1" rows="8" readonly [value]="generatedText()"></textarea>
+          <button type="button" class="btn btn-primary btn-sm mt-3 align-self-start" (click)="copyGeneratedText()">
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
