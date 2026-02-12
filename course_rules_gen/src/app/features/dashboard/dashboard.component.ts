@@ -10,6 +10,10 @@ import {
 import { RulePointNineComponent } from '../rules/point-nine/rule-point-nine.component';
 import { RulePointThreeComponent } from '../rules/point-three/rule-point-three.component';
 import { RulePointFourComponent } from '../rules/point-four/rule-point-four.component';
+import { RulePointFiveComponent } from '../rules/point-five/rule-point-five.component';
+import { RulePointSixComponent } from '../rules/point-six/rule-point-six.component';
+import { RulePointSevenComponent } from '../rules/point-seven/rule-point-seven.component';
+import { RulePointEightComponent } from '../rules/point-eight/rule-point-eight.component';
 import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.component';
 
 @Component({
@@ -20,6 +24,10 @@ import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.compone
     RulePointTwoComponent,
     RulePointThreeComponent,
     RulePointFourComponent,
+    RulePointFiveComponent,
+    RulePointSixComponent,
+    RulePointSevenComponent,
+    RulePointEightComponent,
     RulePointNineComponent,
     RulePointTenComponent,
   ],

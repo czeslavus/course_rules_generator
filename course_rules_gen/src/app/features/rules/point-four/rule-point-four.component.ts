@@ -63,22 +63,22 @@ export class RulePointFourComponent {
   }
 
   protected readonly generatedText = computed(() => {
-    const paragraphs: string[] = [];
+    const lines: string[] = [];
 
     if (this.isExamSubject()) {
-      paragraphs.push(RulePointFourComponent.EXAM_SESSION_TEXT);
+      lines.push(RulePointFourComponent.EXAM_SESSION_TEXT);
     }
 
     for (const type of this.selectedTypes()) {
       const paragraph = this.buildParagraphForType(type.id);
       if (paragraph) {
-        paragraphs.push(paragraph);
+        lines.push(paragraph);
       }
     }
 
-    paragraphs.push(RulePointFourComponent.RANDOM_EVENTS_TEXT);
+    lines.push(RulePointFourComponent.RANDOM_EVENTS_TEXT);
 
-    return paragraphs.join('\n\n');
+    return lines.join('\n');
   });
 
   protected getCount(typeId: ClassTypeId): number {

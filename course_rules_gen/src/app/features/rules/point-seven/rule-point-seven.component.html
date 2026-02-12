@@ -1,0 +1,50 @@
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 card-title mb-3">
+      Punkt 7 - Terminy i tryby ogłaszania wyników etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się i ocen uzyskiwanych przez studentów
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary">
+          <div class="mb-3">
+            <label class="form-label" for="point7-system">System publikacji</label>
+            <select
+              class="form-select"
+              id="point7-system"
+              [ngModel]="systemState()"
+              (ngModelChange)="updateSystem($event)"
+            >
+              <option value="USOS">USOS</option>
+              <option value="LeON">LeON</option>
+            </select>
+          </div>
+
+          <label class="form-label" for="point7-text">Treść punktu</label>
+          <textarea
+            class="form-control"
+            rows="6"
+            id="point7-text"
+            [ngModel]="textState()"
+            (ngModelChange)="updateText($event)"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
+          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <textarea class="form-control flex-grow-1" rows="8" readonly [value]="generatedText()"></textarea>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm mt-3 align-self-start"
+            (click)="copyGeneratedText()"
+            [disabled]="!generatedText()"
+          >
+            Kopiuj do schowka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
