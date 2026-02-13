@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { RuleTemplatesService, replaceTokens } from '../../../core/rule-templates.service';
 import { ClassTypeId, ClassTypeOption } from '../point-two/rule-point-two.component';
 
 interface CountScheduleParams {
@@ -22,26 +24,20 @@ interface PointFourParamsState {
 
 @Component({
   selector: 'app-rule-point-four',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './rule-point-four.component.html',
 })
 export class RulePointFourComponent {
-  private static readonly LAB_REPORT_DEFAULT_TEXT =
-    'sprawozdanie z ćwiczenia laboratoryjnego należy złożyć w ciągu tygodnia od jego wykonania';
-  private static readonly EXAM_SESSION_TEXT =
-    'Terminy egzaminów z przedmiotu określa harmonogram sesji egzaminacyjnej.';
-  private static readonly RANDOM_EVENTS_TEXT =
-    'W przypadku zdarzeń losowych uniemożliwiających przeprowadzenie zaliczeń w terminach wskazanych w regulaminie prowadzący wyznaczy nowy termin z co najmniej tygodniowym wyprzedzeniem i poinformuje o nim studentów korzystając z platformy Leon.';
-
   readonly selectedTypes = input.required<ClassTypeOption[]>();
   readonly isExamSubject = input(false);
+  private readonly templates = inject(RuleTemplatesService);
 
   private readonly paramsState = signal<PointFourParamsState>({
     lecture: this.createCountScheduleParams(this.defaultLectureColloquiumCount()),
     classes: this.createCountScheduleParams(2),
     project: this.createCountScheduleParams(0),
-    laboratory: { text: RulePointFourComponent.LAB_REPORT_DEFAULT_TEXT },
-    computer_classes: { text: RulePointFourComponent.LAB_REPORT_DEFAULT_TEXT },
+    laboratory: { text: this.templates.rulePointFourTemplate().labReportDefault },
+    computer_classes: { text: this.templates.rulePointFourTemplate().labReportDefault },
   });
 
   constructor() {
@@ -60,13 +56,21 @@ export class RulePointFourComponent {
         });
       }
     });
+
+    // Update defaults if template changes (optional, but good for consistency)
+    effect(() => {
+      const template = this.templates.rulePointFourTemplate();
+      // Logic to update default texts if needed could go here, but complex state management
+      // usually avoids overwriting user input. For now, we only initialize with defaults.
+    });
   }
 
   protected readonly generatedText = computed(() => {
     const lines: string[] = [];
+    const template = this.templates.rulePointFourTemplate();
 
     if (this.isExamSubject()) {
-      lines.push(RulePointFourComponent.EXAM_SESSION_TEXT);
+      lines.push(template.examSession);
     }
 
     for (const type of this.selectedTypes()) {
@@ -76,7 +80,7 @@ export class RulePointFourComponent {
       }
     }
 
-    lines.push(RulePointFourComponent.RANDOM_EVENTS_TEXT);
+    lines.push(template.randomEvents);
 
     return lines.join('\n');
   });
@@ -151,44 +155,74 @@ export class RulePointFourComponent {
   }
 
   private buildParagraphForType(typeId: ClassTypeId): string {
+    const template = this.templates.rulePointFourTemplate();
     switch (typeId) {
       case 'lecture':
-        return this.buildColloquiumParagraph('Wykład', this.paramsState().lecture);
+        return this.buildColloquiumParagraph(template.typeLecture, this.paramsState().lecture);
       case 'classes':
-        return this.buildColloquiumParagraph('Ćwiczenia', this.paramsState().classes);
+        return this.buildColloquiumParagraph(template.typeClasses, this.paramsState().classes);
       case 'project':
         return this.buildProjectParagraph(this.paramsState().project);
       case 'laboratory':
-        return `Laboratorium: ${this.ensureTrailingPeriod(this.paramsState().laboratory.text.trim())}`;
+        return replaceTokens(template.laboratory, {
+          text: this.ensureTrailingPeriod(this.paramsState().laboratory.text.trim()),
+        });
       case 'computer_classes':
-        return `Ćwiczenia komputerowe: ${this.ensureTrailingPeriod(this.paramsState().computer_classes.text.trim())}`;
+        return replaceTokens(template.computerClasses, {
+          text: this.ensureTrailingPeriod(this.paramsState().computer_classes.text.trim()),
+        });
       case 'seminar':
-        return 'Seminarium: harmonogram weryfikacji osiągnięcia efektów uczenia się ustala prowadzący zajęcia.';
+        return template.seminar;
       default:
         return '';
     }
   }
 
   private buildColloquiumParagraph(label: string, params: CountScheduleParams): string {
+    const template = this.templates.rulePointFourTemplate();
     if (params.count === 0) {
-      return `${label}: nie przewiduje się kolokwiów.`;
+      return replaceTokens(template.colloquiumNone, { label });
     }
 
     const terms = params.weeks
-      .map((week, index) => `kolokwium ${index + 1} - tydzień ${week}`)
+      .map((week, index) => `${template.singularColloquium} ${index + 1} - ${template.weekPlural} ${week}`)
       .join(', ');
 
-    return `${label}: zaplanowano ${this.formatCount(params.count, 'kolokwium', 'kolokwia', 'kolokwiów')}. Terminy (tydzień zajęć): ${terms}.`;
+    const countText = this.formatCount(
+      params.count,
+      template.singularColloquium,
+      template.paucalColloquium,
+      template.pluralColloquium,
+    );
+
+    return replaceTokens(template.colloquium, {
+      label,
+      countText,
+      terms,
+    });
   }
 
   private buildProjectParagraph(params: CountScheduleParams): string {
+    const template = this.templates.rulePointFourTemplate();
     if (params.count === 0) {
-      return 'Projekt: nie przewiduje się etapów pośrednich.';
+      return template.projectNone;
     }
 
-    const terms = params.weeks.map((week, index) => `etap ${index + 1} - tydzień ${week}`).join(', ');
+    const terms = params.weeks
+      .map((week, index) => `${template.singularStage} ${index + 1} - ${template.weekPlural} ${week}`)
+      .join(', ');
 
-    return `Projekt: zaplanowano ${this.formatCount(params.count, 'etap', 'etapy', 'etapów')}. Terminy etapów (tydzień zajęć): ${terms}.`;
+    const countText = this.formatCount(
+      params.count,
+      template.singularStage,
+      template.paucalStage,
+      template.pluralStage,
+    );
+
+    return replaceTokens(template.project, {
+      countText,
+      terms,
+    });
   }
 
   private patchCountSchedule(

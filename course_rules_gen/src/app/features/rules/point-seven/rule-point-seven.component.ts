@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RuleTemplatesService, replaceTokens } from '../../../core/rule-templates.service';
 
 type PublicationSystem = 'USOS' | 'LeON';
 
@@ -10,25 +11,28 @@ type PublicationSystem = 'USOS' | 'LeON';
   templateUrl: './rule-point-seven.component.html',
 })
 export class RulePointSevenComponent {
-  private static readonly DEFAULT_TEMPLATE =
-    'Oceny cząstkowe z przedmiotu publikowane są w systemie [[SYSTEM]] w przeciągu tygodnia od zakończenia ocenianej aktywności. Wynik końcowy przedmiotu jest publikowany w systeme USOS w terminie 7 dni od ostatniego sprawdzianu, nie później jednak niż do ostatniego dnia  sesji.';
+  private readonly templates = inject(RuleTemplatesService);
 
   protected readonly systemState = signal<PublicationSystem>('USOS');
-  protected readonly textState = signal<string>(this.defaultText(this.systemState()));
+  protected readonly textState = signal<string>('');
 
   constructor() {
     effect(() => {
+      const template = this.templates.rulePointSevenTemplate();
       const system = this.systemState();
-      const nextDefault = this.defaultText(system);
-      const previousDefault = this.defaultText(system === 'USOS' ? 'LeON' : 'USOS');
+      const nextDefault = this.defaultText(template, system);
+      const previousDefault = this.defaultText(template, system === 'USOS' ? 'LeON' : 'USOS');
       const current = this.textState();
+
       const isKnownDefault =
-        current === this.defaultText('USOS') || current === this.defaultText('LeON');
+        current === '' ||
+        current === this.defaultText(template, 'USOS') ||
+        current === this.defaultText(template, 'LeON');
 
       if (current !== nextDefault && (current === previousDefault || isKnownDefault)) {
         this.textState.set(nextDefault);
       }
-    });
+    }, { allowSignalWrites: true });
   }
 
   protected readonly generatedText = computed(() => this.textState().trim());
@@ -45,7 +49,7 @@ export class RulePointSevenComponent {
     void navigator.clipboard.writeText(this.generatedText());
   }
 
-  private defaultText(system: PublicationSystem): string {
-    return RulePointSevenComponent.DEFAULT_TEMPLATE.replace('[[SYSTEM]]', system);
+  private defaultText(template: { defaultTemplate: string }, system: PublicationSystem): string {
+    return replaceTokens(template.defaultTemplate, { SYSTEM: system });
   }
 }

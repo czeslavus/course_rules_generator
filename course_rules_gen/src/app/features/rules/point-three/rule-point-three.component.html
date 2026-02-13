@@ -16,7 +16,7 @@
           <div class="d-grid gap-3">
             @for (type of selectedTypes(); track type.id) {
               <fieldset class="border rounded p-3">
-                <legend class="float-none w-auto px-2 mb-2 fs-6 fw-semibold">{{ type.label }}</legend>
+                <legend class="float-none w-auto px-2 mb-2 fs-6 fw-semibold">{{ type.label | translate }}</legend>
 
                 <div class="mb-3">
                   <label class="form-label" [for]="'point3-rules-' + type.id">Zasady weryfikacji</label>

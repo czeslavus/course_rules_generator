@@ -1,0 +1,16 @@
+{
+    "lectureCredit": "Lecture credit based on a colloquium, from which you can receive XX points. To pass the subject it is necessary to obtain min. 50% points.",
+    "lectureExam": "Lecture credit based on a written exam consisting of XX tasks.",
+    "project": "Project class credit based on grades from XX projects performed during the semester.",
+    "laboratory": "Laboratory credit based on points obtained for subsequent exercises (min. 50% points required).",
+    "computerClasses": "Computer classes credit based on a colloquium, from which you can receive XX points. To pass the subject it is necessary to obtain min. 50% points.",
+    "seminar": "Credit based on the presentation of the thesis topic (33% of the grade), presentation of the selected diploma question (33% of the grade) and development of the selected diploma question (34% of the grade).",
+    "classes": "Classes credit based on two colloquia, it is required to obtain at least 50% from each colloquium.",
+    "typeLecture": "Lecture",
+    "typeClasses": "Classes",
+    "typeLaboratory": "Laboratory",
+    "typeProject": "Project",
+    "typeComputerClasses": "Computer classes",
+    "typeSeminar": "Seminar",
+    "helperMaterials": " Allowed auxiliary materials and devices: [[materials]]."
+}

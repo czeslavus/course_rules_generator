@@ -1,0 +1,54 @@
+{
+  "LOGIN": {
+    "TITLE": "Course Rules Generator",
+    "SUBTITLE": "Log in to edit course rules.",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "SUBMIT": "Log in",
+    "LOGGING_IN": "Logging in...",
+    "ERROR": "Invalid username or password",
+    "HINT": "Test data:"
+  },
+  "MENU": {
+    "GENERATOR": "Generator",
+    "LOGOUT": "Logout"
+  },
+  "DASHBOARD": {
+    "HEADER": {
+      "TITLE": "Course Rules Generator",
+      "SUBTITLE": "Local version - edit rule points."
+    },
+    "SHARED_PARAMS": {
+      "TITLE": "Common parameters for all points",
+      "EXAM_SUBJECT": "Exam subject"
+    },
+    "CLASS_TYPES": {
+      "LECTURE": "lecture",
+      "CLASSES": "classes",
+      "LABORATORY": "laboratory",
+      "PROJECT": "project",
+      "COMPUTER_CLASSES": "computer classes",
+      "SEMINAR": "seminar"
+    }
+  },
+  "RULES": {
+    "POINT_ONE": {
+      "SUBJECT_TYPE": "Subject Type",
+      "LEVEL": "Study Level",
+      "PROGRAMME": "Programme",
+      "PREREQUISITES": "Prerequisites",
+      "GENERATED_PREVIEW": "Generated Preview",
+      "SUBJECT_TYPE_OPTIONS": {
+        "OBOWIĄZKOWY": "compulsory",
+        "WARIANTOWY": "variant",
+        "OBIERALNY": "elective"
+      },
+      "PROGRAMMES": {
+        "MECHATRONICS": "Mechatronics",
+        "BIOMEDICAL_ENGINEERING": "Biomedical Engineering",
+        "AUTOMATION": "Automation, Robotics and Industrial Informatics",
+        "COMMON_PART": "Common part of Mechatronics / ARiI"
+      }
+    }
+  }
+}

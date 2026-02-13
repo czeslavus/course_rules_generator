@@ -5,9 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -44,7 +46,7 @@ export class LoginComponent {
           void this.router.navigateByUrl(returnUrl);
         },
         error: (error: { error?: { message?: string } }) => {
-          this.errorMessage.set(error.error?.message ?? 'Wystąpił błąd logowania.');
+          this.errorMessage.set(error.error?.message ?? 'LOGIN.ERROR');
         },
       });
   }

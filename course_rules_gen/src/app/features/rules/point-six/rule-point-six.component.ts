@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RuleTemplatesService } from '../../../core/rule-templates.service';
 
 @Component({
   selector: 'app-rule-point-six',
@@ -8,20 +9,21 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './rule-point-six.component.html',
 })
 export class RulePointSixComponent {
-  private static readonly DEFAULT_TEXT = `Ocena końcowa wystawiana jest na podstawie sumy punktów z kolokwium i zadań według zależności:
-% zdobytych punktów         Ocena
-< 50% - 60% >                          3,0
-( 60% - 70% >                          3,5
-( 70% - 80% >                          4,0
-( 80% - 90% >                          4,5
-( 90% - 100% >                        5,0`;
+  private readonly templates = inject(RuleTemplatesService);
 
-  protected readonly textState = signal<string>(RulePointSixComponent.DEFAULT_TEXT);
+  protected readonly textState = computed(() => this.templates.rulePointSixTemplate().defaultText);
 
-  protected readonly generatedText = computed(() => this.textState().trim());
+  protected readonly internalTextState = signal<string>('');
+
+  constructor() {
+    const t = this.templates.rulePointSixTemplate();
+    this.internalTextState.set(t.defaultText);
+  }
+
+  protected readonly generatedText = computed(() => this.internalTextState().trim());
 
   protected updateText(text: string): void {
-    this.textState.set(text);
+    this.internalTextState.set(text);
   }
 
   protected copyGeneratedText(): void {

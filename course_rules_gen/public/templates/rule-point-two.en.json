@@ -1,0 +1,14 @@
+{
+    "makeupRulesDefault": "Making up for classes missed due to excused absence is possible with another group realizing the subject at a date agreed with the teacher or subject coordinator.",
+    "lecture": "Attendance at lectures is not mandatory.",
+    "base": "Attendance at [[locative]] is mandatory. A maximum of [[absences]] is allowed. Justification of absence should take place no later than within a week of the end of the absence. The appropriate document must be shown or sent by e-mail to the teacher or subject coordinator.",
+    "locativeClasses": "classes",
+    "locativeLaboratory": "laboratory",
+    "locativeProject": "project",
+    "locativeComputerClasses": "computer classes",
+    "locativeSeminar": "seminar",
+    "locativeLecture": "lectures",
+    "absences1": "1 unexcused absence",
+    "absences2To4": "[[count]] unexcused absences",
+    "absencesMany": "[[count]] unexcused absences"
+}

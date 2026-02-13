@@ -1,0 +1,22 @@
+{
+    "labReportDefault": "laboratory exercise report must be submitted within a week of its completion",
+    "examSession": "Exam dates for the subject are determined by the exam session schedule.",
+    "randomEvents": "In case of random events preventing completion on dates indicated in the regulations, the teacher will set a new date at least one week in advance and inform students about it using the Leon platform.",
+    "colloquiumNone": "[[label]]: no colloquia foreseen.",
+    "colloquium": "[[label]]: planned [[countText]]. Dates (class week): [[terms]].",
+    "projectNone": "Project: no intermediate stages foreseen.",
+    "project": "Project: planned [[countText]]. Stage dates (class week): [[terms]].",
+    "laboratory": "Laboratory: [[text]]",
+    "computerClasses": "Computer classes: [[text]]",
+    "seminar": "Seminar: the schedule for verifying the achievement of learning outcomes is determined by the teacher.",
+    "weekPlural": "week",
+    "typeLecture": "Lecture",
+    "typeClasses": "Classes",
+    "typeProject": "Project",
+    "singularColloquium": "colloquium",
+    "paucalColloquium": "colloquia",
+    "pluralColloquium": "colloquia",
+    "singularStage": "stage",
+    "paucalStage": "stages",
+    "pluralStage": "stages"
+}

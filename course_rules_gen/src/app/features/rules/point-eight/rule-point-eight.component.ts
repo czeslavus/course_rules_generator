@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RuleTemplatesService } from '../../../core/rule-templates.service';
 
 @Component({
   selector: 'app-rule-point-eight',
@@ -8,30 +9,29 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './rule-point-eight.component.html',
 })
 export class RulePointEightComponent {
-  private static readonly EXAM_DEFAULT_TEXT =
-    'Termin egzaminu poprawkowego określa harmonogram wrześniowej sesji egzaminacyjnej';
-  private static readonly NON_EXAM_DEFAULT_TEXT =
-    'W przedmiocie nie przewiduje się dodatkowych terminów poprawkowych';
-
   readonly isExamSubject = input(false);
+  private readonly templates = inject(RuleTemplatesService);
 
-  protected readonly textState = signal<string>(this.defaultText());
+  protected readonly textState = signal<string>('');
 
   constructor() {
     effect(() => {
-      const nextDefault = this.defaultText();
+      const template = this.templates.rulePointEightTemplate();
+      const nextDefault = this.defaultText(template);
       const previousDefault = this.isExamSubject()
-        ? RulePointEightComponent.NON_EXAM_DEFAULT_TEXT
-        : RulePointEightComponent.EXAM_DEFAULT_TEXT;
+        ? template.nonExamDefault
+        : template.examDefault;
       const current = this.textState();
+
       const isKnownDefault =
-        current === RulePointEightComponent.EXAM_DEFAULT_TEXT ||
-        current === RulePointEightComponent.NON_EXAM_DEFAULT_TEXT;
+        current === '' ||
+        current === template.examDefault ||
+        current === template.nonExamDefault;
 
       if (current !== nextDefault && (current === previousDefault || isKnownDefault)) {
         this.textState.set(nextDefault);
       }
-    });
+    }, { allowSignalWrites: true });
   }
 
   protected readonly generatedText = computed(() => this.textState().trim());
@@ -44,9 +44,9 @@ export class RulePointEightComponent {
     void navigator.clipboard.writeText(this.generatedText());
   }
 
-  private defaultText(): string {
+  private defaultText(template: { examDefault: string; nonExamDefault: string }): string {
     return this.isExamSubject()
-      ? RulePointEightComponent.EXAM_DEFAULT_TEXT
-      : RulePointEightComponent.NON_EXAM_DEFAULT_TEXT;
+      ? template.examDefault
+      : template.nonExamDefault;
   }
 }

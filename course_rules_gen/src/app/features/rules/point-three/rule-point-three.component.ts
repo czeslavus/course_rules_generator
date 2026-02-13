@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { RuleTemplatesService, replaceTokens } from '../../../core/rule-templates.service';
 import { ClassTypeId, ClassTypeOption } from '../point-two/rule-point-two.component';
 
 interface ClassTypeVerificationParams {
@@ -10,18 +12,14 @@ interface ClassTypeVerificationParams {
 
 @Component({
   selector: 'app-rule-point-three',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './rule-point-three.component.html',
   styleUrl: './rule-point-three.component.scss',
 })
 export class RulePointThreeComponent {
-  private static readonly LECTURE_DEFAULT_CREDIT =
-    'Zaliczenie wykładu na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.';
-  private static readonly LECTURE_DEFAULT_EXAM =
-    'Zaliczenie wykładu na podstawie egzaminu pisemnego składającego się z XX zadań.';
-
   readonly selectedTypes = input.required<ClassTypeOption[]>();
   readonly isExamSubject = input(false);
+  private readonly templates = inject(RuleTemplatesService);
 
   private readonly paramsState = signal<Record<ClassTypeId, ClassTypeVerificationParams>>({
     lecture: this.createDefaultParams('lecture'),
@@ -34,17 +32,18 @@ export class RulePointThreeComponent {
 
   constructor() {
     effect(() => {
+      const template = this.templates.rulePointThreeTemplate();
       const nextLectureDefault = this.isExamSubject()
-        ? RulePointThreeComponent.LECTURE_DEFAULT_EXAM
-        : RulePointThreeComponent.LECTURE_DEFAULT_CREDIT;
+        ? template.lectureExam
+        : template.lectureCredit;
       const previousLectureDefault = this.isExamSubject()
-        ? RulePointThreeComponent.LECTURE_DEFAULT_CREDIT
-        : RulePointThreeComponent.LECTURE_DEFAULT_EXAM;
+        ? template.lectureCredit
+        : template.lectureExam;
       const currentLectureRules = this.paramsState().lecture.verificationRules;
       const isKnownDefault =
         currentLectureRules === previousLectureDefault ||
-        currentLectureRules === RulePointThreeComponent.LECTURE_DEFAULT_CREDIT ||
-        currentLectureRules === RulePointThreeComponent.LECTURE_DEFAULT_EXAM;
+        currentLectureRules === template.lectureCredit ||
+        currentLectureRules === template.lectureExam;
 
       if (currentLectureRules !== nextLectureDefault && isKnownDefault) {
         this.patchTypeParams('lecture', { verificationRules: nextLectureDefault });
@@ -58,7 +57,9 @@ export class RulePointThreeComponent {
         const params = this.paramsState()[type.id];
         const helperMaterials = params.helperMaterials.trim();
         const helperMaterialsLine = helperMaterials
-          ? ` Dopuszczone materiały i urządzenia pomocnicze: ${helperMaterials}.`
+          ? replaceTokens(this.templates.rulePointThreeTemplate().helperMaterials, {
+            materials: helperMaterials,
+          })
           : '';
 
         return `${this.typeLabel(type.id)}: ${params.verificationRules.trim()}${helperMaterialsLine}`;
@@ -100,40 +101,42 @@ export class RulePointThreeComponent {
   }
 
   private typeLabel(typeId: ClassTypeId): string {
+    const template = this.templates.rulePointThreeTemplate();
     switch (typeId) {
       case 'lecture':
-        return 'Wykład';
+        return template.typeLecture;
       case 'classes':
-        return 'Ćwiczenia';
+        return template.typeClasses;
       case 'laboratory':
-        return 'Laboratorium';
+        return template.typeLaboratory;
       case 'project':
-        return 'Projekt';
+        return template.typeProject;
       case 'computer_classes':
-        return 'Ćwiczenia komputerowe';
+        return template.typeComputerClasses;
       case 'seminar':
-        return 'Seminarium';
+        return template.typeSeminar;
       default:
         return '';
     }
   }
 
   private defaultVerificationRules(typeId: ClassTypeId): string {
+    const template = this.templates.rulePointThreeTemplate();
     switch (typeId) {
       case 'lecture':
         return this.isExamSubject()
-          ? RulePointThreeComponent.LECTURE_DEFAULT_EXAM
-          : RulePointThreeComponent.LECTURE_DEFAULT_CREDIT;
+          ? template.lectureExam
+          : template.lectureCredit;
       case 'project':
-        return 'Zaliczenie zajęć projektowych na podstawie ocen z XX wykonywanych w trakcie semestru projektów.';
+        return template.project;
       case 'laboratory':
-        return 'Zaliczenie laboratorium na podstawie punktów zdobywanych za kolejne ćwiczenia (wymagane zdobycie min. 50% punktów).';
+        return template.laboratory;
       case 'computer_classes':
-        return 'Zaliczenie ćwiczeń komputerowych na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.';
+        return template.computerClasses;
       case 'seminar':
-        return 'Zaliczenie na podstawie prezentacji tematu pracy dyplomowej (33% oceny), prezentacji wybranego pytania dyplomowego (33% oceny) oraz opracowania wybranego pytania dyplomowego (34% oceny).';
+        return template.seminar;
       case 'classes':
-        return 'Zaliczenie ćwiczeń na podstawie dwóch kolokwiów, wymagane jest uzyskanie co najmniej 50% z każdego kolokwium.';
+        return template.classes;
       default:
         return '';
     }

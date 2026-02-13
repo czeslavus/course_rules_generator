@@ -1,0 +1,54 @@
+{
+  "LOGIN": {
+    "TITLE": "Generator regulaminów przedmiotów",
+    "SUBTITLE": "Zaloguj się, aby przejść do edycji regulaminu.",
+    "USERNAME": "Nazwa użytkownika",
+    "PASSWORD": "Hasło",
+    "SUBMIT": "Zaloguj",
+    "LOGGING_IN": "Logowanie...",
+    "ERROR": "Nieprawidłowa nazwa użytkownika lub hasło",
+    "HINT": "Dane testowe:"
+  },
+  "MENU": {
+    "GENERATOR": "Generator",
+    "LOGOUT": "Wyloguj"
+  },
+  "DASHBOARD": {
+    "HEADER": {
+      "TITLE": "Generator regulaminów przedmiotów",
+      "SUBTITLE": "Wersja lokalna - edycja punktów regulaminu."
+    },
+    "SHARED_PARAMS": {
+      "TITLE": "Parametry wspólne dla wszystkich punktów",
+      "EXAM_SUBJECT": "Przedmiot egzaminacyjny"
+    },
+    "CLASS_TYPES": {
+      "LECTURE": "wykład",
+      "CLASSES": "ćwiczenia",
+      "LABORATORY": "laboratorium",
+      "PROJECT": "projekt",
+      "COMPUTER_CLASSES": "ćwiczenia komputerowe",
+      "SEMINAR": "seminarium"
+    }
+  },
+  "RULES": {
+    "POINT_ONE": {
+      "SUBJECT_TYPE": "Rodzaj przedmiotu",
+      "LEVEL": "Poziom studiów",
+      "PROGRAMME": "Program studiów",
+      "PREREQUISITES": "Wymagania wstępne",
+      "GENERATED_PREVIEW": "Podgląd zapisu",
+      "SUBJECT_TYPE_OPTIONS": {
+        "OBOWIĄZKOWY": "obowiązkowy",
+        "WARIANTOWY": "wariantowy",
+        "OBIERALNY": "obieralny"
+      },
+      "PROGRAMMES": {
+        "MECHATRONICS": "Mechatronika",
+        "BIOMEDICAL_ENGINEERING": "Inżynieria Biomedyczna",
+        "AUTOMATION": "Automatyka Robotyka i Informatyka Przemysłowa",
+        "COMMON_PART": "Część wspólna kierunku Mechatronika / ARiIP"
+      }
+    }
+  }
+}

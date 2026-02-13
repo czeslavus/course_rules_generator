@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
+import { LanguageService } from '../../core/language.service';
+import { TranslateModule } from '@ngx-translate/core';
 import { RulePointOneComponent } from '../rules/point-one/rule-point-one.component';
 import {
   ClassTypeId,
@@ -30,20 +32,22 @@ import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.compone
     RulePointEightComponent,
     RulePointNineComponent,
     RulePointTenComponent,
+    TranslateModule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   protected readonly authService = inject(AuthService);
+  protected readonly languageService = inject(LanguageService);
 
   protected readonly classTypeOptions: ClassTypeOption[] = [
-    { id: 'lecture', label: 'wykład' },
-    { id: 'classes', label: 'ćwiczenia' },
-    { id: 'laboratory', label: 'laboratorium' },
-    { id: 'project', label: 'projekt' },
-    { id: 'computer_classes', label: 'ćwiczenia komputerowe' },
-    { id: 'seminar', label: 'seminarium' },
+    { id: 'lecture', label: 'DASHBOARD.CLASS_TYPES.LECTURE' },
+    { id: 'classes', label: 'DASHBOARD.CLASS_TYPES.CLASSES' },
+    { id: 'laboratory', label: 'DASHBOARD.CLASS_TYPES.LABORATORY' },
+    { id: 'project', label: 'DASHBOARD.CLASS_TYPES.PROJECT' },
+    { id: 'computer_classes', label: 'DASHBOARD.CLASS_TYPES.COMPUTER_CLASSES' },
+    { id: 'seminar', label: 'DASHBOARD.CLASS_TYPES.SEMINAR' },
   ];
 
   private readonly selectedTypeIds = signal<ClassTypeId[]>(['lecture']);

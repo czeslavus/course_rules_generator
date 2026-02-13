@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { RuleTemplatesService, replaceTokens } from '../../../core/rule-templates.service';
 
 export type ClassTypeId =
   | 'lecture'
@@ -26,12 +28,13 @@ const DEFAULT_MAKEUP_RULES_TEXT =
 
 @Component({
   selector: 'app-rule-point-two',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './rule-point-two.component.html',
   styleUrl: './rule-point-two.component.scss',
 })
 export class RulePointTwoComponent {
   readonly selectedTypes = input.required<ClassTypeOption[]>();
+  private readonly templates = inject(RuleTemplatesService);
 
   private readonly paramsState = signal<Record<ClassTypeId, ClassTypeParams>>({
     lecture: this.createDefaultParams(),
@@ -75,7 +78,7 @@ export class RulePointTwoComponent {
     return {
       maxUnexcusedAbsences: 1,
       allowMakeup: false,
-      makeupRulesText: DEFAULT_MAKEUP_RULES_TEXT,
+      makeupRulesText: this.templates.rulePointTwoTemplate().makeupRulesDefault,
     };
   }
 
@@ -90,16 +93,20 @@ export class RulePointTwoComponent {
   }
 
   private buildParagraphForType(typeId: ClassTypeId): string {
+    const template = this.templates.rulePointTwoTemplate();
+
     if (typeId === 'lecture') {
-      return 'Uczestnictwo w wykładach jest nieobowiązkowe.';
+      return template.lecture;
     }
 
     const params = this.paramsState()[typeId];
-    const baseText =
-      `Obecność na ${this.classTypeLocative(typeId)} jest obowiązkowa. ` +
-      `Dopuszcza się maksymalnie ${this.formatUnexcusedAbsences(params.maxUnexcusedAbsences)}. ` +
-      'Usprawiedliwienie nieobecności powinno nastąpić najpóźniej w ciągu tygodnia od zakończenia nieobecności. ' +
-      'Odpowiedni dokument należy okazać lub przesłać e-mailem prowadzącemu zajęcia lub koordynatorowi przedmiotu.';
+    const locative = this.classTypeLocative(typeId);
+    const absences = this.formatUnexcusedAbsences(params.maxUnexcusedAbsences);
+
+    const baseText = replaceTokens(template.base, {
+      locative,
+      absences,
+    });
 
     if (!params.allowMakeup) {
       return baseText;
@@ -109,32 +116,34 @@ export class RulePointTwoComponent {
   }
 
   private classTypeLocative(typeId: ClassTypeId): string {
+    const template = this.templates.rulePointTwoTemplate();
     switch (typeId) {
       case 'classes':
-        return 'ćwiczeniach';
+        return template.locativeClasses;
       case 'laboratory':
-        return 'laboratorium';
+        return template.locativeLaboratory;
       case 'project':
-        return 'projekcie';
+        return template.locativeProject;
       case 'computer_classes':
-        return 'ćwiczeniach komputerowych';
+        return template.locativeComputerClasses;
       case 'seminar':
-        return 'seminarium';
+        return template.locativeSeminar;
       case 'lecture':
       default:
-        return 'wykładach';
+        return template.locativeLecture;
     }
   }
 
   private formatUnexcusedAbsences(count: number): string {
+    const template = this.templates.rulePointTwoTemplate();
     if (count === 1) {
-      return '1 nieusprawiedliwioną nieobecność';
+      return template.absences1;
     }
 
     if (count >= 2 && count <= 4) {
-      return `${count} nieusprawiedliwione nieobecności`;
+      return replaceTokens(template.absences2To4, { count: count.toString() });
     }
 
-    return `${count} nieusprawiedliwionych nieobecności`;
+    return replaceTokens(template.absencesMany, { count: count.toString() });
   }
 }
