@@ -33,11 +33,12 @@
   },
   "RULES": {
     "POINT_ONE": {
+      "TITLE": "Punkt 1 - Rekomendacje i ograniczenia udziału studentów",
       "SUBJECT_TYPE": "Rodzaj przedmiotu",
       "LEVEL": "Poziom studiów",
       "PROGRAMME": "Program studiów",
       "PREREQUISITES": "Wymagania wstępne",
-      "GENERATED_PREVIEW": "Podgląd zapisu",
+      "PREREQUISITES_PLACEHOLDER": "Np. zaliczenie Matematyki 1 i Podstaw Programowania",
       "SUBJECT_TYPE_OPTIONS": {
         "OBOWIĄZKOWY": "obowiązkowy",
         "WARIANTOWY": "wariantowy",
@@ -49,6 +50,61 @@
         "AUTOMATION": "Automatyka Robotyka i Informatyka Przemysłowa",
         "COMMON_PART": "Część wspólna kierunku Mechatronika / ARiIP"
       }
+    },
+    "POINT_TWO": {
+      "TITLE": "Punkt 2 - Zasady wymaganej obecności studenta na zajęciach, na których obecność jest obowiązkowa",
+      "SELECT_CLASS_TYPE_HINT": "Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 2.",
+      "MAX_UNEXCUSED_ABSENCES": "Dopuszczalna liczba nieusprawiedliwionych nieobecności (x)",
+      "MAKEUP_ALLOWED": "Możliwość odrabiania",
+      "MAKEUP_RULES": "Zasady odrabiania",
+      "LECTURE_AUTO_TEXT": "Dla wykładu tekst jest generowany automatycznie."
+    },
+    "POINT_THREE": {
+      "TITLE": "Punkt 3 - Szczegółowe sposoby etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się oraz rodzaje materiałów i urządzeń dopuszczonych do używania przez studentów podczas weryfikacji osiągnięcia efektów uczenia się",
+      "SELECT_CLASS_TYPE_HINT": "Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 3.",
+      "VERIFICATION_RULES": "Zasady weryfikacji",
+      "HELPER_MATERIALS": "Materiały i urządzenia pomocnicze (opcjonalnie)",
+      "HELPER_MATERIALS_PLACEHOLDER": "Np. kalkulator prosty, tablice wzorów"
+    },
+    "POINT_FOUR": {
+      "TITLE": "Punkt 4 - Harmonogram etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się, w szczególności terminy sprawdzianów pisemnych i ustnych oraz terminy złożenia sprawozdań z wykonania ćwiczeń laboratoryjnych i projektów z uwzględnieniem terminów poprawkowych, jeśli specyfika przedmiotu to umożliwia",
+      "SELECT_CLASS_TYPE_HINT": "Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 4.",
+      "COLLOQUIUM_COUNT": "Liczba kolokwiów",
+      "COLLOQUIUM_TERM": "Termin kolokwium {{index}} (tydzień zajęć 1-15)",
+      "STAGE_COUNT": "Liczba etapów",
+      "STAGE_TERM": "Termin etapu {{index}} (tydzień zajęć 1-15)",
+      "REPORT_SCHEDULE": "Harmonogram składania sprawozdań",
+      "SEMINAR_TEXT": "Treść dla seminarium",
+      "AUTO_GENERATED_SCHEDULE": "Dla tego typu zajęć harmonogram weryfikacji jest generowany automatycznie."
+    },
+    "POINT_FIVE": {
+      "TITLE": "Punkt 5 - Możliwości i zasady udziału studentów w dodatkowych terminach sprawdzianów i egzaminów",
+      "POINT_TEXT": "Treść punktu"
+    },
+    "POINT_SIX": {
+      "TITLE": "Punkt 6 - Zasady zaliczania przedmiotu i wystawiania oceny końcowej z przedmiotu",
+      "POINT_TEXT": "Treść punktu"
+    },
+    "POINT_SEVEN": {
+      "TITLE": "Punkt 7 - Terminy i tryby ogłaszania wyników etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się i ocen uzyskiwanych przez studentów",
+      "PUBLICATION_SYSTEM": "System publikacji",
+      "POINT_TEXT": "Treść punktu"
+    },
+    "POINT_EIGHT": {
+      "TITLE": "Punkt 8 - Zasady poprawiania wyników etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się i ocen uzyskiwanych przez studentów",
+      "POINT_TEXT": "Treść punktu"
+    },
+    "POINT_NINE": {
+      "TITLE": "Punkt 9 - Zasady powtarzania z powodu niezadowalających wyników w nauce poszczególnych typów zajęć realizowanych w ramach przedmiotu",
+      "FIXED_TEXT": "Stały tekst punktu"
+    },
+    "POINT_TEN": {
+      "TITLE": "Punkt 10 - Inne informacje w zależności od specyfiki realizowanych zajęć",
+      "POINT_TEXT": "Tekst punktu 10"
+    },
+    "COMMON": {
+      "GENERATED_TEXT": "Wygenerowany tekst",
+      "COPY_TO_CLIPBOARD": "Kopiuj do schowka"
     }
   }
 }

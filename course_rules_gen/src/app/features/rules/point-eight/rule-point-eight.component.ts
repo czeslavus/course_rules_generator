@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { RuleTemplatesService } from '../../../core/rule-templates.service';
 
 @Component({
   selector: 'app-rule-point-eight',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './rule-point-eight.component.html',
 })
 export class RulePointEightComponent {
   readonly isExamSubject = input(false);
   private readonly templates = inject(RuleTemplatesService);
+  private previousDefaults: [string, string] = ['', ''];
 
   protected readonly textState = signal<string>('');
 
@@ -18,19 +20,20 @@ export class RulePointEightComponent {
     effect(() => {
       const template = this.templates.rulePointEightTemplate();
       const nextDefault = this.defaultText(template);
-      const previousDefault = this.isExamSubject()
-        ? template.nonExamDefault
-        : template.examDefault;
       const current = this.textState();
 
       const isKnownDefault =
         current === '' ||
         current === template.examDefault ||
-        current === template.nonExamDefault;
+        current === template.nonExamDefault ||
+        current === this.previousDefaults[0] ||
+        current === this.previousDefaults[1];
 
-      if (current !== nextDefault && (current === previousDefault || isKnownDefault)) {
+      if (current !== nextDefault && isKnownDefault) {
         this.textState.set(nextDefault);
       }
+
+      this.previousDefaults = [template.examDefault, template.nonExamDefault];
     }, { allowSignalWrites: true });
   }
 

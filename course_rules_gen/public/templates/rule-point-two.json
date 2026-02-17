@@ -1,0 +1,14 @@
+{
+  "makeupRulesDefault": "Odrobienie zajęć z dnia usprawiedliwionej nieobecności możliwe jest z inną grupą realizującą przedmiot w terminie ustalonym z prowadzącym zajęcia lub koordynatorem przedmiotu.",
+  "lecture": "Uczestnictwo w wykładach jest nieobowiązkowe.",
+  "base": "Obecność na [[locative]] jest obowiązkowa. Dopuszcza się maksymalnie [[absences]]. Usprawiedliwienie nieobecności powinno nastąpić najpóźniej w ciągu tygodnia od zakończenia nieobecności. Odpowiedni dokument należy okazać lub przesłać e-mailem prowadzącemu zajęcia lub koordynatorowi przedmiotu.",
+  "locativeClasses": "ćwiczeniach",
+  "locativeLaboratory": "laboratorium",
+  "locativeProject": "projekcie",
+  "locativeComputerClasses": "ćwiczeniach komputerowych",
+  "locativeSeminar": "seminarium",
+  "locativeLecture": "wykładach",
+  "absences1": "1 nieusprawiedliwioną nieobecność",
+  "absences2To4": "[[count]] nieusprawiedliwione nieobecności",
+  "absencesMany": "[[count]] nieusprawiedliwionych nieobecności"
+}

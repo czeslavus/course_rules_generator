@@ -93,114 +93,93 @@ export interface RulePointTenTemplate {
 }
 
 const DEFAULT_RULE_POINT_ONE_TEMPLATE: RulePointOneTemplate = {
-  main: 'Przedmiot [[subjectType]] dla studentów studiów [[degreeLevel]]-go stopnia [[programmePart]]. [[prerequisitesLine]]',
-  programmeDefault: 'na kierunku [[programme]]',
-  programmeCommon:
-    'części wspólnej kierunków Mechatronika i Automatyka Robotyka i Informatyka Przemysłowa',
-  commonProgrammeValue: 'Część wspólna kierunku Mechatronika / ARiIP',
-  prerequisitesProvided: 'Wymagania wstępne: [[prerequisites]].',
-  prerequisitesNone: 'Brak wymagań wstępnych.',
+  main: '',
+  programmeDefault: '',
+  programmeCommon: '',
+  commonProgrammeValue: '',
+  prerequisitesProvided: '',
+  prerequisitesNone: '',
 };
 
 const DEFAULT_RULE_POINT_TWO_TEMPLATE: RulePointTwoTemplate = {
-  makeupRulesDefault:
-    'Odrobienie zajęć z dnia usprawiedliwionej nieobecności możliwe jest z inną grupą realizującą przedmiot w terminie ustalonym z prowadzącym zajęcia lub koordynatorem przedmiotu.',
-  lecture: 'Uczestnictwo w wykładach jest nieobowiązkowe.',
-  base: 'Obecność na [[locative]] jest obowiązkowa. Dopuszcza się maksymalnie [[absences]]. Usprawiedliwienie nieobecności powinno nastąpić najpóźniej w ciągu tygodnia od zakończenia nieobecności. Odpowiedni dokument należy okazać lub przesłać e-mailem prowadzącemu zajęcia lub koordynatorowi przedmiotu.',
-  locativeClasses: 'ćwiczeniach',
-  locativeLaboratory: 'laboratorium',
-  locativeProject: 'projekcie',
-  locativeComputerClasses: 'ćwiczeniach komputerowych',
-  locativeSeminar: 'seminarium',
-  locativeLecture: 'wykładach',
-  absences1: '1 nieusprawiedliwioną nieobecność',
-  absences2To4: '[[count]] nieusprawiedliwione nieobecności',
-  absencesMany: '[[count]] nieusprawiedliwionych nieobecności',
+  makeupRulesDefault: '',
+  lecture: '',
+  base: '',
+  locativeClasses: '',
+  locativeLaboratory: '',
+  locativeProject: '',
+  locativeComputerClasses: '',
+  locativeSeminar: '',
+  locativeLecture: '',
+  absences1: '',
+  absences2To4: '',
+  absencesMany: '',
 };
 
 const DEFAULT_RULE_POINT_THREE_TEMPLATE: RulePointThreeTemplate = {
-  lectureCredit:
-    'Zaliczenie wykładu na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.',
-  lectureExam: 'Zaliczenie wykładu na podstawie egzaminu pisemnego składającego się z XX zadań.',
-  project:
-    'Zaliczenie zajęć projektowych na podstawie ocen z XX wykonywanych w trakcie semestru projektów.',
-  laboratory:
-    'Zaliczenie laboratorium na podstawie punktów zdobywanych za kolejne ćwiczenia (wymagane zdobycie min. 50% punktów).',
-  computerClasses:
-    'Zaliczenie ćwiczeń komputerowych na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.',
-  seminar:
-    'Zaliczenie na podstawie prezentacji tematu pracy dyplomowej (33% oceny), prezentacji wybranego pytania dyplomowego (33% oceny) oraz opracowania wybranego pytania dyplomowego (34% oceny).',
-  classes:
-    'Zaliczenie ćwiczeń na podstawie dwóch kolokwiów, wymagane jest uzyskanie co najmniej 50% z każdego kolokwium.',
-  typeLecture: 'Wykład',
-  typeClasses: 'Ćwiczenia',
-  typeLaboratory: 'Laboratorium',
-  typeProject: 'Projekt',
-  typeComputerClasses: 'Ćwiczenia komputerowe',
-  typeSeminar: 'Seminarium',
-  helperMaterials: ' Dopuszczone materiały i urządzenia pomocnicze: [[materials]].',
+  lectureCredit: '',
+  lectureExam: '',
+  project: '',
+  laboratory: '',
+  computerClasses: '',
+  seminar: '',
+  classes: '',
+  typeLecture: '',
+  typeClasses: '',
+  typeLaboratory: '',
+  typeProject: '',
+  typeComputerClasses: '',
+  typeSeminar: '',
+  helperMaterials: '',
 };
 
 const DEFAULT_RULE_POINT_FOUR_TEMPLATE: RulePointFourTemplate = {
-  labReportDefault:
-    'sprawozdanie z ćwiczenia laboratoryjnego należy złożyć w ciągu tygodnia od jego wykonania',
-  examSession: 'Terminy egzaminów z przedmiotu określa harmonogram sesji egzaminacyjnej.',
-  randomEvents:
-    'W przypadku zdarzeń losowych uniemożliwiających przeprowadzenie zaliczeń w terminach wskazanych w regulaminie prowadzący wyznaczy nowy termin z co najmniej tygodniowym wyprzedzeniem i poinformuje o nim studentów korzystając z platformy Leon.',
-  colloquiumNone: '[[label]]: nie przewiduje się kolokwiów.',
-  colloquium:
-    '[[label]]: zaplanowano [[countText]]. Terminy (tydzień zajęć): [[terms]].',
-  projectNone: 'Projekt: nie przewiduje się etapów pośrednich.',
-  project:
-    'Projekt: zaplanowano [[countText]]. Terminy etapów (tydzień zajęć): [[terms]].',
-  laboratory: 'Laboratorium: [[text]]',
-  computerClasses: 'Ćwiczenia komputerowe: [[text]]',
-  seminar:
-    'Seminarium: harmonogram weryfikacji osiągnięcia efektów uczenia się ustala prowadzący zajęcia.',
-  weekPlural: 'tydzień', // Note: simplistic, context-dependent in Polish, but good enough for "tydzień X"
-  typeLecture: 'Wykład',
-  typeClasses: 'Ćwiczenia',
-  typeProject: 'Projekt',
-  singularColloquium: 'kolokwium',
-  paucalColloquium: 'kolokwia',
-  pluralColloquium: 'kolokwiów',
-  singularStage: 'etap',
-  paucalStage: 'etapy',
-  pluralStage: 'etapów',
+  labReportDefault: '',
+  examSession: '',
+  randomEvents: '',
+  colloquiumNone: '',
+  colloquium: '',
+  projectNone: '',
+  project: '',
+  laboratory: '',
+  computerClasses: '',
+  seminar: '',
+  weekPlural: '',
+  typeLecture: '',
+  typeClasses: '',
+  typeProject: '',
+  singularColloquium: '',
+  paucalColloquium: '',
+  pluralColloquium: '',
+  singularStage: '',
+  paucalStage: '',
+  pluralStage: '',
 };
 
 const DEFAULT_RULE_POINT_FIVE_TEMPLATE: RulePointFiveTemplate = {
-  examDefault: 'Dodatkowy "zerowy" termin egzaminu odbędie się na ostatnim wykładzie',
-  nonExamDefault: 'Dodatkowe terminy poza wskazanymi w pkt 4 nie są przewidziane',
+  examDefault: '',
+  nonExamDefault: '',
 };
 
 const DEFAULT_RULE_POINT_SIX_TEMPLATE: RulePointSixTemplate = {
-  defaultText: `Ocena końcowa wystawiana jest na podstawie sumy punktów z kolokwium i zadań według zależności:
-% zdobytych punktów         Ocena
-< 50% - 60% >                          3,0
-( 60% - 70% >                          3,5
-( 70% - 80% >                          4,0
-( 80% - 90% >                          4,5
-( 90% - 100% >                        5,0`,
+  defaultText: '',
 };
 
 const DEFAULT_RULE_POINT_SEVEN_TEMPLATE: RulePointSevenTemplate = {
-  defaultTemplate:
-    'Oceny cząstkowe z przedmiotu publikowane są w systemie [[SYSTEM]] w przeciągu tygodnia od zakończenia ocenianej aktywności. Wynik końcowy przedmiotu jest publikowany w systeme USOS w terminie 7 dni od ostatniego sprawdzianu, nie później jednak niż do ostatniego dnia  sesji.',
+  defaultTemplate: '',
 };
 
 const DEFAULT_RULE_POINT_EIGHT_TEMPLATE: RulePointEightTemplate = {
-  examDefault:
-    'Termin egzaminu poprawkowego określa harmonogram wrześniowej sesji egzaminacyjnej',
-  nonExamDefault: 'W przedmiocie nie przewiduje się dodatkowych terminów poprawkowych',
+  examDefault: '',
+  nonExamDefault: '',
 };
 
 const DEFAULT_RULE_POINT_NINE_TEMPLATE: RulePointNineTemplate = {
-  text: 'W przypadku otrzymania oceny negatywnej z przedmiotu, jego zaliczenie możliwe jest w kolejnej jego edycji, zgodnie z decyzją Dziekana Wydziału',
+  text: '',
 };
 
 const DEFAULT_RULE_POINT_TEN_TEMPLATE: RulePointTenTemplate = {
-  text: 'Osoby z niepełnosprawnościami proszone są o zgłaszanie potrzeby wsparcia prowadzącemu zajęcia lub koordynatorowi przedmiotu',
+  text: '',
 };
 
 export function replaceTokens(template: string, values: Record<string, string>): string {

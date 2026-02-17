@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RuleTemplatesService, replaceTokens } from '../../../core/rule-templates.service';
@@ -35,6 +35,7 @@ const DEFAULT_MAKEUP_RULES_TEXT =
 export class RulePointTwoComponent {
   readonly selectedTypes = input.required<ClassTypeOption[]>();
   private readonly templates = inject(RuleTemplatesService);
+  private previousMakeupDefault = '';
 
   private readonly paramsState = signal<Record<ClassTypeId, ClassTypeParams>>({
     lecture: this.createDefaultParams(),
@@ -72,6 +73,47 @@ export class RulePointTwoComponent {
 
   protected copyGeneratedText(): void {
     void navigator.clipboard.writeText(this.generatedText());
+  }
+
+  constructor() {
+    effect(() => {
+      const currentDefault = this.templates.rulePointTwoTemplate().makeupRulesDefault;
+
+      this.paramsState.update((state) => {
+        const nextState: Record<ClassTypeId, ClassTypeParams> = { ...state };
+        let changed = false;
+
+        const typeIds: ClassTypeId[] = [
+          'lecture',
+          'classes',
+          'laboratory',
+          'project',
+          'computer_classes',
+          'seminar',
+        ];
+
+        for (const typeId of typeIds) {
+          const currentText = state[typeId].makeupRulesText;
+          const isKnownDefault =
+            currentText === '' ||
+            currentText === currentDefault ||
+            currentText === DEFAULT_MAKEUP_RULES_TEXT ||
+            currentText === this.previousMakeupDefault;
+
+          if (isKnownDefault && currentText !== currentDefault) {
+            nextState[typeId] = {
+              ...state[typeId],
+              makeupRulesText: currentDefault,
+            };
+            changed = true;
+          }
+        }
+
+        return changed ? nextState : state;
+      });
+
+      this.previousMakeupDefault = currentDefault;
+    }, { allowSignalWrites: true });
   }
 
   private createDefaultParams(): ClassTypeParams {

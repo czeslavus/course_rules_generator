@@ -1,20 +1,20 @@
 <section class="card shadow-sm">
   <div class="card-body">
-    <h2 class="h5 card-title mb-3">Punkt 1 - Rekomendacje i ograniczenia udziału studentów</h2>
+    <h2 class="h5 card-title mb-3">{{ 'RULES.POINT_ONE.TITLE' | translate }}</h2>
 
     <div class="row g-3">
       <form class="col-6 d-grid gap-3" [formGroup]="form">
         <div>
-          <label class="form-label" for="point1-subjectType">Typ przedmiotu</label>
+          <label class="form-label" for="point1-subjectType">{{ 'RULES.POINT_ONE.SUBJECT_TYPE' | translate }}</label>
           <select class="form-select" id="point1-subjectType" formControlName="subjectType">
-            <option value="obowiązkowy">Obowiązkowy</option>
-            <option value="wariantowy">Wariantowy</option>
-            <option value="obieralny">Obieralny</option>
+            <option value="OBOWIĄZKOWY">{{ 'RULES.POINT_ONE.SUBJECT_TYPE_OPTIONS.OBOWIĄZKOWY' | translate }}</option>
+            <option value="WARIANTOWY">{{ 'RULES.POINT_ONE.SUBJECT_TYPE_OPTIONS.WARIANTOWY' | translate }}</option>
+            <option value="OBIERALNY">{{ 'RULES.POINT_ONE.SUBJECT_TYPE_OPTIONS.OBIERALNY' | translate }}</option>
           </select>
         </div>
 
         <div>
-          <label class="form-label" for="point1-degreeLevel">Stopień studiów</label>
+          <label class="form-label" for="point1-degreeLevel">{{ 'RULES.POINT_ONE.LEVEL' | translate }}</label>
           <select class="form-select" id="point1-degreeLevel" formControlName="degreeLevel">
             <option value="I">I</option>
             <option value="II">II</option>
@@ -22,38 +22,33 @@
         </div>
 
         <div>
-          <label class="form-label" for="point1-programme">Program / kierunek</label>
+          <label class="form-label" for="point1-programme">{{ 'RULES.POINT_ONE.PROGRAMME' | translate }}</label>
           <select class="form-select" id="point1-programme" formControlName="programme">
-            <option value="Mechatronika">Mechatronika</option>
-            <option value="Automatyka Robotyka i Informatyka Przemysłowa">
-              Automatyka Robotyka i Informatyka Przemysłowa
-            </option>
-            <option value="Inżynieria Biomedyczna">Inżynieria Biomedyczna</option>
-            <option value="Mechatronics">Mechatronics</option>
-            <option value="Część wspólna kierunku Mechatronika / ARiIP">
-              Część wspólna kierunku Mechatronika / ARiIP
-            </option>
+            <option value="MECHATRONICS">{{ 'RULES.POINT_ONE.PROGRAMMES.MECHATRONICS' | translate }}</option>
+            <option value="AUTOMATION">{{ 'RULES.POINT_ONE.PROGRAMMES.AUTOMATION' | translate }}</option>
+            <option value="BIOMEDICAL_ENGINEERING">{{ 'RULES.POINT_ONE.PROGRAMMES.BIOMEDICAL_ENGINEERING' | translate }}</option>
+            <option value="COMMON_PART">{{ 'RULES.POINT_ONE.PROGRAMMES.COMMON_PART' | translate }}</option>
           </select>
         </div>
 
         <div>
-          <label class="form-label" for="point1-prerequisites">Wymagania wstępne (opcjonalne)</label>
+          <label class="form-label" for="point1-prerequisites">{{ 'RULES.POINT_ONE.PREREQUISITES' | translate }}</label>
           <textarea
             class="form-control"
             id="point1-prerequisites"
             formControlName="prerequisites"
             rows="4"
-            placeholder="Np. zaliczenie Matematyki 1 i Podstaw Programowania"
+            [placeholder]="'RULES.POINT_ONE.PREREQUISITES_PLACEHOLDER' | translate"
           ></textarea>
         </div>
       </form>
 
       <div class="col-6">
         <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
-          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <h3 class="h6 mb-2">{{ 'RULES.COMMON.GENERATED_TEXT' | translate }}</h3>
           <textarea class="form-control flex-grow-1" rows="8" readonly [value]="generatedText()"></textarea>
           <button type="button" class="btn btn-primary btn-sm mt-3 align-self-start" (click)="copyGeneratedText()">
-            Kopiuj do schowka
+            {{ 'RULES.COMMON.COPY_TO_CLIPBOARD' | translate }}
           </button>
         </div>
       </div>

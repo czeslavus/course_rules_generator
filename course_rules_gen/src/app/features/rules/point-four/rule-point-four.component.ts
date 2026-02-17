@@ -20,6 +20,7 @@ interface PointFourParamsState {
   project: CountScheduleParams;
   laboratory: TextScheduleParams;
   computer_classes: TextScheduleParams;
+  seminar: TextScheduleParams;
 }
 
 @Component({
@@ -31,6 +32,8 @@ export class RulePointFourComponent {
   readonly selectedTypes = input.required<ClassTypeOption[]>();
   readonly isExamSubject = input(false);
   private readonly templates = inject(RuleTemplatesService);
+  private previousLabReportDefault = '';
+  private previousSeminarDefault = '';
 
   private readonly paramsState = signal<PointFourParamsState>({
     lecture: this.createCountScheduleParams(this.defaultLectureColloquiumCount()),
@@ -38,6 +41,7 @@ export class RulePointFourComponent {
     project: this.createCountScheduleParams(0),
     laboratory: { text: this.templates.rulePointFourTemplate().labReportDefault },
     computer_classes: { text: this.templates.rulePointFourTemplate().labReportDefault },
+    seminar: { text: this.templates.rulePointFourTemplate().seminar },
   });
 
   constructor() {
@@ -57,12 +61,47 @@ export class RulePointFourComponent {
       }
     });
 
-    // Update defaults if template changes (optional, but good for consistency)
     effect(() => {
       const template = this.templates.rulePointFourTemplate();
-      // Logic to update default texts if needed could go here, but complex state management
-      // usually avoids overwriting user input. For now, we only initialize with defaults.
-    });
+      const defaultText = template.labReportDefault;
+      const seminarDefaultText = template.seminar;
+
+      this.paramsState.update((state) => {
+        const nextState = { ...state };
+        let changed = false;
+
+        const labText = state.laboratory.text;
+        const compText = state.computer_classes.text;
+        const seminarText = state.seminar.text;
+        const isLabKnownDefault =
+          labText === '' || labText === defaultText || labText === this.previousLabReportDefault;
+        const isCompKnownDefault =
+          compText === '' || compText === defaultText || compText === this.previousLabReportDefault;
+        const isSeminarKnownDefault =
+          seminarText === '' ||
+          seminarText === seminarDefaultText ||
+          seminarText === this.previousSeminarDefault;
+
+        if (isLabKnownDefault && labText !== defaultText) {
+          nextState.laboratory = { text: defaultText };
+          changed = true;
+        }
+
+        if (isCompKnownDefault && compText !== defaultText) {
+          nextState.computer_classes = { text: defaultText };
+          changed = true;
+        }
+        if (isSeminarKnownDefault && seminarText !== seminarDefaultText) {
+          nextState.seminar = { text: seminarDefaultText };
+          changed = true;
+        }
+
+        return changed ? nextState : state;
+      });
+
+      this.previousLabReportDefault = defaultText;
+      this.previousSeminarDefault = seminarDefaultText;
+    }, { allowSignalWrites: true });
   }
 
   protected readonly generatedText = computed(() => {
@@ -130,7 +169,7 @@ export class RulePointFourComponent {
   }
 
   protected getSubmissionText(typeId: ClassTypeId): string {
-    if (typeId !== 'laboratory' && typeId !== 'computer_classes') {
+    if (typeId !== 'laboratory' && typeId !== 'computer_classes' && typeId !== 'seminar') {
       return '';
     }
 
@@ -138,7 +177,7 @@ export class RulePointFourComponent {
   }
 
   protected updateSubmissionText(typeId: ClassTypeId, text: string): void {
-    if (typeId !== 'laboratory' && typeId !== 'computer_classes') {
+    if (typeId !== 'laboratory' && typeId !== 'computer_classes' && typeId !== 'seminar') {
       return;
     }
 
@@ -172,7 +211,7 @@ export class RulePointFourComponent {
           text: this.ensureTrailingPeriod(this.paramsState().computer_classes.text.trim()),
         });
       case 'seminar':
-        return template.seminar;
+        return this.ensureTrailingPeriod(this.paramsState().seminar.text.trim());
       default:
         return '';
     }

@@ -1,3 +1,8 @@
 {
-  "main": "[[subjectType]] at the [[degreeLevel]] level is part of the [[programmePart]] study programme. [[prerequisitesLine]]"
+  "main": "The [[subjectType]] course for [[degreeLevel]] level students [[programmePart]]. [[prerequisitesLine]]",
+  "programmeDefault": "in the [[programme]] programme",
+  "programmeCommon": "common part of the Mechatronics and Automation, Robotics and Industrial Informatics programmes",
+  "commonProgrammeValue": "Common part of Mechatronics / ARiI",
+  "prerequisitesProvided": "Prerequisites: [[prerequisites]].",
+  "prerequisitesNone": "No prerequisites."
 }

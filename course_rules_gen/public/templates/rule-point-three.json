@@ -1,0 +1,16 @@
+{
+  "lectureCredit": "Zaliczenie wykładu na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.",
+  "lectureExam": "Zaliczenie wykładu na podstawie egzaminu pisemnego składającego się z XX zadań.",
+  "project": "Zaliczenie zajęć projektowych na podstawie ocen z XX wykonywanych w trakcie semestru projektów.",
+  "laboratory": "Zaliczenie laboratorium na podstawie punktów zdobywanych za kolejne ćwiczenia (wymagane zdobycie min. 50% punktów).",
+  "computerClasses": "Zaliczenie ćwiczeń komputerowych na podstawie kolokwium, z którego można otrzymać XX punktów. Do zaliczenia przedmiotu konieczne jest zdobycie min. 50% punktów.",
+  "seminar": "Zaliczenie na podstawie prezentacji tematu pracy dyplomowej (33% oceny), prezentacji wybranego pytania dyplomowego (33% oceny) oraz opracowania wybranego pytania dyplomowego (34% oceny).",
+  "classes": "Zaliczenie ćwiczeń na podstawie dwóch kolokwiów, wymagane jest uzyskanie co najmniej 50% z każdego kolokwium.",
+  "typeLecture": "Wykład",
+  "typeClasses": "Ćwiczenia",
+  "typeLaboratory": "Laboratorium",
+  "typeProject": "Projekt",
+  "typeComputerClasses": "Ćwiczenia komputerowe",
+  "typeSeminar": "Seminarium",
+  "helperMaterials": " Dopuszczone materiały i urządzenia pomocnicze: [[materials]]."
+}

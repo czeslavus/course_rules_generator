@@ -1,17 +1,14 @@
 <section class="card shadow-sm">
   <div class="card-body">
     <h2 class="h5 card-title mb-3">
-      Punkt 4 - Harmonogram etapowej/końcowej weryfikacji osiągnięcia efektów uczenia się, w
-      szczególności terminy sprawdzianów pisemnych i ustnych oraz terminy złożenia sprawozdań z
-      wykonania ćwiczeń laboratoryjnych i projektów z uwzględnieniem terminów poprawkowych, jeśli
-      specyfika przedmiotu to umożliwia
+      {{ 'RULES.POINT_FOUR.TITLE' | translate }}
     </h2>
 
     <div class="row g-3">
       <div class="col-6">
         @if (!selectedTypes().length) {
           <div class="alert alert-secondary mb-0" role="status">
-            Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 4.
+            {{ 'RULES.POINT_FOUR.SELECT_CLASS_TYPE_HINT' | translate }}
           </div>
         } @else {
           <div class="d-grid gap-3">
@@ -21,7 +18,7 @@
 
                 @if (type.id === 'lecture' || type.id === 'classes') {
                   <div class="mb-3">
-                    <label class="form-label" [for]="'point4-count-' + type.id">Liczba kolokwiów</label>
+                    <label class="form-label" [for]="'point4-count-' + type.id">{{ 'RULES.POINT_FOUR.COLLOQUIUM_COUNT' | translate }}</label>
                     <input
                       class="form-control"
                       type="number"
@@ -37,7 +34,7 @@
                       @for (week of getWeeks(type.id); track $index) {
                         <div>
                           <label class="form-label" [for]="'point4-week-' + type.id + '-' + $index">
-                            Termin kolokwium {{ $index + 1 }} (tydzień zajęć 1-15)
+                            {{ 'RULES.POINT_FOUR.COLLOQUIUM_TERM' | translate:{ index: $index + 1 } }}
                           </label>
                           <input
                             class="form-control"
@@ -54,7 +51,7 @@
                   }
                 } @else if (type.id === 'project') {
                   <div class="mb-3">
-                    <label class="form-label" [for]="'point4-count-' + type.id">Liczba etapów</label>
+                    <label class="form-label" [for]="'point4-count-' + type.id">{{ 'RULES.POINT_FOUR.STAGE_COUNT' | translate }}</label>
                     <input
                       class="form-control"
                       type="number"
@@ -70,7 +67,7 @@
                       @for (week of getWeeks(type.id); track $index) {
                         <div>
                           <label class="form-label" [for]="'point4-week-' + type.id + '-' + $index">
-                            Termin etapu {{ $index + 1 }} (tydzień zajęć 1-15)
+                            {{ 'RULES.POINT_FOUR.STAGE_TERM' | translate:{ index: $index + 1 } }}
                           </label>
                           <input
                             class="form-control"
@@ -87,7 +84,18 @@
                   }
                 } @else if (type.id === 'laboratory' || type.id === 'computer_classes') {
                   <label class="form-label" [for]="'point4-submission-' + type.id">
-                    Harmonogram składania sprawozdań
+                    {{ 'RULES.POINT_FOUR.REPORT_SCHEDULE' | translate }}
+                  </label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    [id]="'point4-submission-' + type.id"
+                    [ngModel]="getSubmissionText(type.id)"
+                    (ngModelChange)="updateSubmissionText(type.id, $event)"
+                  ></textarea>
+                } @else if (type.id === 'seminar') {
+                  <label class="form-label" [for]="'point4-submission-' + type.id">
+                    {{ 'RULES.POINT_FOUR.SEMINAR_TEXT' | translate }}
                   </label>
                   <textarea
                     class="form-control"
@@ -98,7 +106,7 @@
                   ></textarea>
                 } @else {
                   <p class="text-body-secondary mb-0">
-                    Dla tego typu zajęć harmonogram weryfikacji jest generowany automatycznie.
+                    {{ 'RULES.POINT_FOUR.AUTO_GENERATED_SCHEDULE' | translate }}
                   </p>
                 }
               </fieldset>
@@ -109,7 +117,7 @@
 
       <div class="col-6">
         <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
-          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <h3 class="h6 mb-2">{{ 'RULES.COMMON.GENERATED_TEXT' | translate }}</h3>
           <textarea class="form-control flex-grow-1" rows="8" readonly [value]="generatedText()"></textarea>
           <button
             type="button"
@@ -117,7 +125,7 @@
             (click)="copyGeneratedText()"
             [disabled]="!generatedText()"
           >
-            Kopiuj do schowka
+            {{ 'RULES.COMMON.COPY_TO_CLIPBOARD' | translate }}
           </button>
         </div>
       </div>

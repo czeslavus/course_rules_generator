@@ -1,14 +1,14 @@
 <section class="card shadow-sm">
   <div class="card-body">
     <h2 class="h5 card-title mb-3">
-      Punkt 2 - Zasady wymaganej obecności studenta na zajęciach, na których obecność jest obowiązkowa
+      {{ 'RULES.POINT_TWO.TITLE' | translate }}
     </h2>
 
     <div class="row g-3">
       <div class="col-6">
         @if (!selectedTypes().length) {
           <div class="alert alert-secondary mb-0" role="status">
-            Wybierz co najmniej jeden typ zajęć w sekcji parametrów wspólnych, aby skonfigurować punkt 2.
+            {{ 'RULES.POINT_TWO.SELECT_CLASS_TYPE_HINT' | translate }}
           </div>
         } @else {
           <div class="d-grid gap-3">
@@ -19,7 +19,7 @@
                 @if (type.id !== 'lecture') {
                   <div class="mb-3">
                     <label class="form-label" [for]="'point2-max-' + type.id">
-                      Dopuszczalna liczba nieusprawiedliwionych nieobecności (x)
+                      {{ 'RULES.POINT_TWO.MAX_UNEXCUSED_ABSENCES' | translate }}
                     </label>
                     <input
                       class="form-control"
@@ -40,13 +40,13 @@
                       (change)="updateAllowMakeup(type.id, $any($event.target).checked)"
                     />
                     <label class="form-check-label" [for]="'point2-makeup-' + type.id">
-                      Możliwość odrabiania
+                      {{ 'RULES.POINT_TWO.MAKEUP_ALLOWED' | translate }}
                     </label>
                   </div>
 
                   @if (getParams(type.id).allowMakeup) {
                     <div>
-                      <label class="form-label" [for]="'point2-makeup-text-' + type.id">Zasady odrabiania</label>
+                      <label class="form-label" [for]="'point2-makeup-text-' + type.id">{{ 'RULES.POINT_TWO.MAKEUP_RULES' | translate }}</label>
                       <textarea
                         class="form-control"
                         rows="4"
@@ -57,7 +57,7 @@
                     </div>
                   }
                 } @else {
-                  <p class="text-body-secondary mb-0">Dla wykładu tekst jest generowany automatycznie.</p>
+                  <p class="text-body-secondary mb-0">{{ 'RULES.POINT_TWO.LECTURE_AUTO_TEXT' | translate }}</p>
                 }
               </fieldset>
             }
@@ -67,7 +67,7 @@
 
       <div class="col-6">
         <div class="border rounded p-3 h-100 bg-body-tertiary d-flex flex-column">
-          <h3 class="h6 mb-2">Wygenerowany tekst</h3>
+          <h3 class="h6 mb-2">{{ 'RULES.COMMON.GENERATED_TEXT' | translate }}</h3>
           <textarea class="form-control flex-grow-1" rows="8" readonly [value]="generatedText()"></textarea>
           <button
             type="button"
@@ -75,7 +75,7 @@
             (click)="copyGeneratedText()"
             [disabled]="!generatedText()"
           >
-            Kopiuj do schowka
+            {{ 'RULES.COMMON.COPY_TO_CLIPBOARD' | translate }}
           </button>
         </div>
       </div>

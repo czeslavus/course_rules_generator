@@ -1,0 +1,22 @@
+{
+  "labReportDefault": "sprawozdanie z ćwiczenia laboratoryjnego należy złożyć w ciągu tygodnia od jego wykonania",
+  "examSession": "Terminy egzaminów z przedmiotu określa harmonogram sesji egzaminacyjnej.",
+  "randomEvents": "W przypadku zdarzeń losowych uniemożliwiających przeprowadzenie zaliczeń w terminach wskazanych w regulaminie prowadzący wyznaczy nowy termin z co najmniej tygodniowym wyprzedzeniem i poinformuje o nim studentów korzystając z platformy Leon.",
+  "colloquiumNone": "[[label]]: nie przewiduje się kolokwiów.",
+  "colloquium": "[[label]]: zaplanowano [[countText]]. Terminy (tydzień zajęć): [[terms]].",
+  "projectNone": "Projekt: nie przewiduje się etapów pośrednich.",
+  "project": "Projekt: zaplanowano [[countText]]. Terminy etapów (tydzień zajęć): [[terms]].",
+  "laboratory": "Laboratorium: [[text]]",
+  "computerClasses": "Ćwiczenia komputerowe: [[text]]",
+  "seminar": "Wymagane jest zaliczenie wszystkich ocenianych aktywności na seminarium do ostatniego dnia zajęć semestru",
+  "weekPlural": "tydzień",
+  "typeLecture": "Wykład",
+  "typeClasses": "Ćwiczenia",
+  "typeProject": "Projekt",
+  "singularColloquium": "kolokwium",
+  "paucalColloquium": "kolokwia",
+  "pluralColloquium": "kolokwiów",
+  "singularStage": "etap",
+  "paucalStage": "etapy",
+  "pluralStage": "etapów"
+}

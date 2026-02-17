@@ -33,11 +33,12 @@
   },
   "RULES": {
     "POINT_ONE": {
+      "TITLE": "Point 1 - Recommendations and restrictions for student participation",
       "SUBJECT_TYPE": "Subject Type",
       "LEVEL": "Study Level",
       "PROGRAMME": "Programme",
       "PREREQUISITES": "Prerequisites",
-      "GENERATED_PREVIEW": "Generated Preview",
+      "PREREQUISITES_PLACEHOLDER": "e.g. completion of Mathematics 1 and Programming Fundamentals",
       "SUBJECT_TYPE_OPTIONS": {
         "OBOWIĄZKOWY": "compulsory",
         "WARIANTOWY": "variant",
@@ -49,6 +50,61 @@
         "AUTOMATION": "Automation, Robotics and Industrial Informatics",
         "COMMON_PART": "Common part of Mechatronics / ARiI"
       }
+    },
+    "POINT_TWO": {
+      "TITLE": "Point 2 - Rules of required student attendance in classes where attendance is mandatory",
+      "SELECT_CLASS_TYPE_HINT": "Select at least one class type in the shared parameters section to configure point 2.",
+      "MAX_UNEXCUSED_ABSENCES": "Allowed number of unexcused absences (x)",
+      "MAKEUP_ALLOWED": "Make-up option",
+      "MAKEUP_RULES": "Make-up rules",
+      "LECTURE_AUTO_TEXT": "For lectures, the text is generated automatically."
+    },
+    "POINT_THREE": {
+      "TITLE": "Point 3 - Detailed methods of interim/final verification of learning outcomes and types of materials and devices allowed for students during verification of learning outcomes",
+      "SELECT_CLASS_TYPE_HINT": "Select at least one class type in the shared parameters section to configure point 3.",
+      "VERIFICATION_RULES": "Verification rules",
+      "HELPER_MATERIALS": "Auxiliary materials and devices (optional)",
+      "HELPER_MATERIALS_PLACEHOLDER": "e.g. basic calculator, formula sheet"
+    },
+    "POINT_FOUR": {
+      "TITLE": "Point 4 - Schedule of interim/final verification of learning outcomes, in particular dates of written and oral tests and dates for submitting reports from laboratory exercises and projects, including retake dates if the course specifics allow it",
+      "SELECT_CLASS_TYPE_HINT": "Select at least one class type in the shared parameters section to configure point 4.",
+      "COLLOQUIUM_COUNT": "Number of colloquia",
+      "COLLOQUIUM_TERM": "Colloquium date {{index}} (teaching week 1-15)",
+      "STAGE_COUNT": "Number of stages",
+      "STAGE_TERM": "Stage date {{index}} (teaching week 1-15)",
+      "REPORT_SCHEDULE": "Report submission schedule",
+      "SEMINAR_TEXT": "Seminar text",
+      "AUTO_GENERATED_SCHEDULE": "For this class type, the verification schedule is generated automatically."
+    },
+    "POINT_FIVE": {
+      "TITLE": "Point 5 - Options and rules for student participation in additional test and exam dates",
+      "POINT_TEXT": "Point text"
+    },
+    "POINT_SIX": {
+      "TITLE": "Point 6 - Rules for completing the course and issuing the final course grade",
+      "POINT_TEXT": "Point text"
+    },
+    "POINT_SEVEN": {
+      "TITLE": "Point 7 - Deadlines and modes for announcing the results of interim/final verification of learning outcomes and grades obtained by students",
+      "PUBLICATION_SYSTEM": "Publication system",
+      "POINT_TEXT": "Point text"
+    },
+    "POINT_EIGHT": {
+      "TITLE": "Point 8 - Rules for improving the results of interim/final verification of learning outcomes and grades obtained by students",
+      "POINT_TEXT": "Point text"
+    },
+    "POINT_NINE": {
+      "TITLE": "Point 9 - Rules for repeating classes due to unsatisfactory academic results for individual types of classes within the course",
+      "FIXED_TEXT": "Fixed point text"
+    },
+    "POINT_TEN": {
+      "TITLE": "Point 10 - Other information depending on the specifics of conducted classes",
+      "POINT_TEXT": "Point 10 text"
+    },
+    "COMMON": {
+      "GENERATED_TEXT": "Generated text",
+      "COPY_TO_CLIPBOARD": "Copy to clipboard"
     }
   }
 }

@@ -20,6 +20,14 @@ export class RulePointThreeComponent {
   readonly selectedTypes = input.required<ClassTypeOption[]>();
   readonly isExamSubject = input(false);
   private readonly templates = inject(RuleTemplatesService);
+  private previousDefaults: Record<ClassTypeId, string> = {
+    lecture: '',
+    classes: '',
+    laboratory: '',
+    project: '',
+    computer_classes: '',
+    seminar: '',
+  };
 
   private readonly paramsState = signal<Record<ClassTypeId, ClassTypeVerificationParams>>({
     lecture: this.createDefaultParams('lecture'),
@@ -32,23 +40,49 @@ export class RulePointThreeComponent {
 
   constructor() {
     effect(() => {
-      const template = this.templates.rulePointThreeTemplate();
-      const nextLectureDefault = this.isExamSubject()
-        ? template.lectureExam
-        : template.lectureCredit;
-      const previousLectureDefault = this.isExamSubject()
-        ? template.lectureCredit
-        : template.lectureExam;
-      const currentLectureRules = this.paramsState().lecture.verificationRules;
-      const isKnownDefault =
-        currentLectureRules === previousLectureDefault ||
-        currentLectureRules === template.lectureCredit ||
-        currentLectureRules === template.lectureExam;
+      const typeIds: ClassTypeId[] = [
+        'lecture',
+        'classes',
+        'laboratory',
+        'project',
+        'computer_classes',
+        'seminar',
+      ];
 
-      if (currentLectureRules !== nextLectureDefault && isKnownDefault) {
-        this.patchTypeParams('lecture', { verificationRules: nextLectureDefault });
-      }
-    });
+      const currentDefaults: Record<ClassTypeId, string> = {
+        lecture: this.defaultVerificationRules('lecture'),
+        classes: this.defaultVerificationRules('classes'),
+        laboratory: this.defaultVerificationRules('laboratory'),
+        project: this.defaultVerificationRules('project'),
+        computer_classes: this.defaultVerificationRules('computer_classes'),
+        seminar: this.defaultVerificationRules('seminar'),
+      };
+
+      this.paramsState.update((state) => {
+        const nextState = { ...state };
+        let changed = false;
+
+        for (const typeId of typeIds) {
+          const currentRules = state[typeId].verificationRules;
+          const isKnownDefault =
+            currentRules === '' ||
+            currentRules === currentDefaults[typeId] ||
+            currentRules === this.previousDefaults[typeId];
+
+          if (isKnownDefault && currentRules !== currentDefaults[typeId]) {
+            nextState[typeId] = {
+              ...state[typeId],
+              verificationRules: currentDefaults[typeId],
+            };
+            changed = true;
+          }
+        }
+
+        return changed ? nextState : state;
+      });
+
+      this.previousDefaults = { ...currentDefaults };
+    }, { allowSignalWrites: true });
   }
 
   protected readonly generatedText = computed(() => {
