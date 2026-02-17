@@ -28,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideTranslateHttpLoader({
       useHttpBackend: true,
-      prefix: '/i18n/',
+      prefix: 'i18n/',
       suffix: '.json',
     }),
     provideAppInitializer(() => {
@@ -39,4 +39,3 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => inject(RuleTemplatesService).load()),
   ],
 };
-

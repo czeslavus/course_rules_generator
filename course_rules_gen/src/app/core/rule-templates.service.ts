@@ -284,7 +284,7 @@ export class RuleTemplatesService {
 
   private async fetchTemplate<T>(filename: string): Promise<T | null> {
     try {
-      return await firstValueFrom(this.http.get<T>(`/templates/${filename}`));
+      return await firstValueFrom(this.http.get<T>(`templates/${filename}`));
     } catch {
       // Ignore individual failures, return null to use default
       return null;
