@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/course_rules_gen/",
               "budgets": [
                 {
                   "type": "initial",

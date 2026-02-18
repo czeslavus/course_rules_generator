@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { AuthService } from '../../core/auth.service';
 import { LanguageService } from '../../core/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { RulePointOneComponent } from '../rules/point-one/rule-point-one.component';
@@ -38,7 +37,6 @@ import { RulePointTenComponent } from '../rules/point-ten/rule-point-ten.compone
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  protected readonly authService = inject(AuthService);
   protected readonly languageService = inject(LanguageService);
 
   protected readonly classTypeOptions: ClassTypeOption[] = [
@@ -76,10 +74,5 @@ export class DashboardComponent {
 
   protected toggleExamSubject(checked: boolean): void {
     this.examSubjectState.set(checked);
-  }
-
-  protected logout(): void {
-    this.authService.logout();
-    window.location.href = '/login';
   }
 }
