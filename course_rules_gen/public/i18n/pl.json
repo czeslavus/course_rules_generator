@@ -1,4 +1,7 @@
 {
+  "APP": {
+    "TITLE": "Generator regulaminów"
+  },
   "LOGIN": {
     "TITLE": "Generator regulaminów przedmiotów",
     "SUBTITLE": "Zaloguj się, aby przejść do edycji regulaminu.",

@@ -1,4 +1,7 @@
 {
+  "APP": {
+    "TITLE": "Course rules generator"
+  },
   "LOGIN": {
     "TITLE": "Course Rules Generator",
     "SUBTITLE": "Log in to edit course rules.",
